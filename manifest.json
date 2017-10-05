@@ -1,0 +1,13 @@
+{
+  "manifest_version": 2,
+  "name": "CBSA Border Wait Times",
+  "version": "0.1",
+  "content_scripts": [
+  {
+    "matches": [
+      "http://www.cbsa-asfc.gc.ca/bwt-taf/menu-eng.html"
+    ],
+    "js": ["content.js"]
+  }
+]
+}
