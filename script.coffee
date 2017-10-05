@@ -1,14 +1,20 @@
-printYoungestChild = (element) -> 
+data = new Array()
+
+getRowData = (element, record) -> 
     if element.contents().length > 0
         do element
             .contents()
             .filter "br"
             .remove
         element.contents().each ->
-            printYoungestChild $ this
+            getRowData $(this), record
     else
-        console.log do element.text
+        record.push do element.text
 
 $ "tbody > tr" 
     .each -> 
-        printYoungestChild $ this
+        record = new Array()
+        getRowData $(this), record
+        data.push record
+    console.log data
+        
