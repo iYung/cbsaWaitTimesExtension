@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "compile": "coffee -c -b ./",
-    "setup": "coffee -c -b setup.coffee && node setup.js"
+    "setup": "coffee -c -b ./ && node setup.js"
   },
   "repository": {
     "type": "git",
