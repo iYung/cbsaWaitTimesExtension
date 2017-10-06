@@ -7,6 +7,6 @@
     "matches": [
       "http://www.cbsa-asfc.gc.ca/bwt-taf/menu-eng.html"
     ],
-    "js": ["jquery-3.2.1.slim.min","script.js"]
+    "js": ["jquery-3.2.1.slim.min.js","script.js"]
   }]
 }
