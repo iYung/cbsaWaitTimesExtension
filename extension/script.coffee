@@ -72,10 +72,15 @@ $ "tbody > tr"
     
     console.log data
     
-tableHeaders = $("thead > tr > th").on "click", ->
-    if do $(this).text == "CBSA Office"
-        console.log "Office Clicked"
-    else if do $(this).text == "Commercial Flow"
-        console.log "Commercial Flow Clicked"
-    else if do $(this).text == "Travellers Flow"
-        console.log "Travellers Flow Clicked"
+ $ "thead > tr > th"
+    .each ->
+        $(this).attr "id", $(this).text().replace " ", ''
+    
+$("#CBSAOffice").on "click", ->
+    console.log "Office clicked!"
+
+$("#CommercialFlow").on "click", ->
+    console.log "Commercial Flow!"
+
+$("#TravellersFlow").on "click", ->
+    console.log "Travellers Flow!"
