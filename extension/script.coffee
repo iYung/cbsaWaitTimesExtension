@@ -77,5 +77,5 @@ tableHeaders = $("thead > tr > th").on "click", ->
         console.log "Office Clicked"
     else if do $(this).text == "Commercial Flow"
         console.log "Commercial Flow Clicked"
-    if do $(this).text == "Travellers Flow"
+    else if do $(this).text == "Travellers Flow"
         console.log "Travellers Flow Clicked"
