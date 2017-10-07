@@ -68,8 +68,14 @@ $ "tbody > tr"
         record = new Array()
         getRowData $(this), record
         data.push record
-    printRows sortDataByName data
+    printRows sortDataByTravellers data
     
     console.log data
-	
-        
+    
+tableHeaders = $("thead > tr > th").on "click", ->
+    if do $(this).text == "CBSA Office"
+        console.log "Office Clicked"
+    else if do $(this).text == "Commercial Flow"
+        console.log "Commercial Flow Clicked"
+    if do $(this).text == "Travellers Flow"
+        console.log "Travellers Flow Clicked"
