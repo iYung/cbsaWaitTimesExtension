@@ -31,6 +31,27 @@ sortDataByTravellers = () ->
             return 1
         else
             return 0
+            
+sortDataByCommercial = () ->
+    data.sort (a, b) ->
+        bValue = aValue = 0 
+        if a[2].indexOf(" minutes") >= 0
+            aValue = parseInt a[2].replace " minutes", ""
+        else if a[2].indexOf(" minute") >= 0
+            aValue = parseInt a[2].replace " minute", ""
+        if b[2].indexOf(" minutes") >= 0
+            bValue = parseInt b[2].replace " minutes", ""
+        else if b[2].indexOf(" minute") >= 0
+            aValue = parseInt b[2].replace " minute", ""
+        n = aValue - bValue
+        if n != 0
+            return n
+        else if a[0] > b[0]
+            return -1
+        else if a[0] < b[0]
+            return 1
+        else
+            return 0
 		
 printRows = (rows) ->
     do $("tbody tr").empty
@@ -44,7 +65,7 @@ $ "tbody > tr"
         record = new Array()
         getRowData $(this), record
         data.push record
-    do sortDataByTravellers
+    do sortDataByCommercial
     printRows data
 	
         
