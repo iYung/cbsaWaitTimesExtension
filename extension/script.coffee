@@ -10,8 +10,11 @@ getRowData = (element, record) ->
             getRowData $(this), record
     else
         record.push do element.text
-        
-sortDataByTravellers = () ->
+
+sortDataByName = (data) ->
+    do data.sort().reverse
+    
+sortDataByTravellers = (data) ->
     data.sort (a, b) ->
         bValue = aValue = 0 
         if a[3].indexOf(" minutes") >= 0
@@ -32,7 +35,7 @@ sortDataByTravellers = () ->
         else
             return 0
             
-sortDataByCommercial = () ->
+sortDataByCommercial = (data) ->
     data.sort (a, b) ->
         bValue = aValue = 0 
         if a[2].indexOf(" minutes") >= 0
@@ -65,7 +68,8 @@ $ "tbody > tr"
         record = new Array()
         getRowData $(this), record
         data.push record
-    do sortDataByCommercial
-    printRows data
+    printRows sortDataByName data
+    
+    console.log data
 	
         
