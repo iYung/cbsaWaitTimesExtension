@@ -83,11 +83,11 @@ $("#CBSAOffice").on "click", ->
     descending = true
     $("#CommercialFlow").text "Commercial Flow"
     $("#TravellersFlow").text "Travellers Flow"
-    if do $(this).text == "CBSA Office ▼"
+    if do $(this).text == "CBSA Office ▲"
         descending = false
-        $(this).text "CBSA Office ▲"
-    else
         $(this).text "CBSA Office ▼"
+    else
+        $(this).text "CBSA Office ▲"
     printRows sortDataByName data, descending
     console.log "Office clicked!"
 
