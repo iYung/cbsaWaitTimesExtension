@@ -11,8 +11,11 @@ getRowData = (element, record) ->
     else
         record.push do element.text
 
-sortDataByName = (data) ->
-    do data.sort().reverse
+sortDataByName = (data, descending) ->
+    if descending
+        do data.sort().reverse
+    else
+        do data.sort
     
 sortDataByTravellers = (data) ->
     data.sort (a, b) ->
@@ -72,15 +75,30 @@ $ "tbody > tr"
     
     console.log data
     
- $ "thead > tr > th"
+$ "thead > tr > th"
     .each ->
         $(this).attr "id", $(this).text().replace " ", ''
     
 $("#CBSAOffice").on "click", ->
+    descending = true
+    $("#CommercialFlow").text "Commercial Flow"
+    $("#TravellersFlow").text "Travellers Flow"
+    if do $(this).text == "CBSA Office ▼"
+        descending = false
+        $(this).text "CBSA Office ▲"
+    else
+        $(this).text "CBSA Office ▼"
+    printRows sortDataByName data, descending
     console.log "Office clicked!"
 
 $("#CommercialFlow").on "click", ->
+    $("#CBSAOffice").text "CBSA Office"
+    $("#TravellersFlow").text "Travellers Flow"
+    printRows sortDataByCommercial data
     console.log "Commercial Flow!"
 
 $("#TravellersFlow").on "click", ->
+    $("#CBSAOffice").text "CBSA Office"
+    $("#CommercialFlow").text "Commercial Flow"
+    printRows sortDataByTravellers data
     console.log "Travellers Flow!"
