@@ -11,13 +11,14 @@ getRowData = (element, record) ->
     else
         record.push do element.text
 
-sortDataByName = (data, descending) ->
-    if descending
+sortDataByName = (data, ascending) ->
+    if ascending
         do data.sort().reverse
     else
         do data.sort
+    return data
     
-sortDataByTravellers = (data) ->
+sortDataByTravellers = (data, ascending) ->
     data.sort (a, b) ->
         bValue = aValue = 0 
         if a[3].indexOf(" minutes") >= 0
@@ -37,8 +38,11 @@ sortDataByTravellers = (data) ->
             return 1
         else
             return 0
+    if ascending
+        do data.reverse
+    return data
             
-sortDataByCommercial = (data) ->
+sortDataByCommercial = (data, ascending) ->
     data.sort (a, b) ->
         bValue = aValue = 0 
         if a[2].indexOf(" minutes") >= 0
@@ -58,20 +62,22 @@ sortDataByCommercial = (data) ->
             return 1
         else
             return 0
+    if ascending
+        do data.reverse
+    return data
 		
 printRows = (rows) ->
     do $("tbody tr").empty
     rows.forEach (row) ->
         $ "tbody"
             .prepend "<tr><th><b>" + row[0] + "</b><br>" + row[1] + "<br></th><td>" + row[2] + "</td><td>" + row[3] + "</td><td>" + row[4] + "</td></tr>"
-    $("tbody th ").css {"text-align": "left", "font-weight": "normal"}
 
 $ "tbody > tr" 
     .each -> 
         record = new Array()
         getRowData $(this), record
         data.push record
-    printRows sortDataByTravellers data
+    printRows sortDataByTravellers data, true
     
     console.log data
     
@@ -80,25 +86,37 @@ $ "thead > tr > th"
         $(this).attr "id", $(this).text().replace " ", ''
     
 $("#CBSAOffice").on "click", ->
-    descending = true
+    ascending = true
     $("#CommercialFlow").text "Commercial Flow"
     $("#TravellersFlow").text "Travellers Flow"
     if do $(this).text == "CBSA Office ▲"
-        descending = false
+        ascending = false
         $(this).text "CBSA Office ▼"
     else
         $(this).text "CBSA Office ▲"
-    printRows sortDataByName data, descending
+    printRows sortDataByName data, ascending
     console.log "Office clicked!"
 
 $("#CommercialFlow").on "click", ->
+    ascending = true
     $("#CBSAOffice").text "CBSA Office"
     $("#TravellersFlow").text "Travellers Flow"
-    printRows sortDataByCommercial data
+    if do $(this).text == "Commercial Flow ▲"
+        ascending = false
+        $(this).text "Commercial Flow ▼"
+    else
+        $(this).text "Commercial Flow ▲"
+    printRows sortDataByCommercial data, ascending
     console.log "Commercial Flow!"
 
 $("#TravellersFlow").on "click", ->
+    ascending = true
     $("#CBSAOffice").text "CBSA Office"
     $("#CommercialFlow").text "Commercial Flow"
-    printRows sortDataByTravellers data
+    if do $(this).text == "Travellers Flow ▲"
+        ascending = false
+        $(this).text "Travellers Flow ▼"
+    else
+        $(this).text "Travellers Flow ▲"
+    printRows sortDataByTravellers data, ascending
     console.log "Travellers Flow!"
