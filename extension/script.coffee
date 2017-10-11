@@ -89,11 +89,11 @@ $("#CBSAOffice").on "click", ->
     ascending = true
     $("#CommercialFlow").text "Commercial Flow"
     $("#TravellersFlow").text "Travellers Flow"
-    if do $(this).text == "CBSA Office ▲"
+    if do $(this).text == "CBSA Office ▼"
+        $(this).text "CBSA Office ▲"
+    else
         ascending = false
         $(this).text "CBSA Office ▼"
-    else
-        $(this).text "CBSA Office ▲"
     printRows sortDataByName data, ascending
     console.log "Office clicked!"
 
@@ -101,11 +101,11 @@ $("#CommercialFlow").on "click", ->
     ascending = true
     $("#CBSAOffice").text "CBSA Office"
     $("#TravellersFlow").text "Travellers Flow"
-    if do $(this).text == "Commercial Flow ▲"
+    if do $(this).text == "Commercial Flow ▼"
+        $(this).text "Commercial Flow ▲"
+    else
         ascending = false
         $(this).text "Commercial Flow ▼"
-    else
-        $(this).text "Commercial Flow ▲"
     printRows sortDataByCommercial data, ascending
     console.log "Commercial Flow!"
 
@@ -113,10 +113,10 @@ $("#TravellersFlow").on "click", ->
     ascending = true
     $("#CBSAOffice").text "CBSA Office"
     $("#CommercialFlow").text "Commercial Flow"
-    if do $(this).text == "Travellers Flow ▲"
+    if do $(this).text == "Travellers Flow ▼"
+        $(this).text "Travellers Flow ▲"
+    else
         ascending = false
         $(this).text "Travellers Flow ▼"
-    else
-        $(this).text "Travellers Flow ▲"
     printRows sortDataByTravellers data, ascending
     console.log "Travellers Flow!"
