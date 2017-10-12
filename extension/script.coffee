@@ -118,6 +118,9 @@ $ "tbody > tr"
         getRowData $(this), record
         data.push record
 
+$ "#bwttaf caption"
+    .append "<br><input placeholder='Search offices'></input>"
+
 do $("#TravellersFlow").click
     
 console.log data
