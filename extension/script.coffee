@@ -65,21 +65,6 @@ sortDataByCommercial = (data, ascending) ->
     if ascending
         do data.reverse
     return data
-		
-printRows = (rows) ->
-    do $("tbody tr").empty
-    rows.forEach (row) ->
-        $ "tbody"
-            .prepend "<tr><th><b>" + row[0] + "</b><br>" + row[1] + "<br></th><td>" + row[2] + "</td><td>" + row[3] + "</td><td>" + row[4] + "</td></tr>"
-
-$ "tbody > tr" 
-    .each -> 
-        record = new Array()
-        getRowData $(this), record
-        data.push record
-    printRows sortDataByTravellers data, true
-    
-    console.log data
     
 $ "thead > tr > th"
     .each ->
@@ -120,3 +105,19 @@ $("#TravellersFlow").on "click", ->
         $(this).text "Travellers Flow ▼"
     printRows sortDataByTravellers data, ascending
     console.log "Travellers Flow!"
+    
+printRows = (rows) ->
+    do $("tbody tr").empty
+    rows.forEach (row) ->
+        $ "tbody"
+            .prepend "<tr><th><b>" + row[0] + "</b><br>" + row[1] + "<br></th><td>" + row[2] + "</td><td>" + row[3] + "</td><td>" + row[4] + "</td></tr>"
+
+$ "tbody > tr" 
+    .each -> 
+        record = new Array()
+        getRowData $(this), record
+        data.push record
+
+do $("#TravellersFlow").click
+    
+console.log data
