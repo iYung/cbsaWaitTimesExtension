@@ -1,5 +1,7 @@
 data = new Array()
 
+selectedData = new Array()
+
 #Functions that get/manipulate/print data
 getRowData = (element, record) -> 
     if element.contents().length > 0
@@ -83,6 +85,8 @@ $ "tbody > tr"
         record = new Array()
         getRowData $(this), record
         data.push record
+        
+selectedData = data
 
 $ "#bwttaf caption"
     .append "<br><input placeholder='Search offices'></input>"
@@ -97,7 +101,7 @@ $("#CBSAOffice").on "click", ->
     else
         ascending = false
         $(this).text "CBSA Office ▼"
-    printRows sortDataByName data, ascending
+    printRows sortDataByName selectedData, ascending
     console.log "Office clicked!"
 
 $("#CommercialFlow").on "click", ->
@@ -109,7 +113,7 @@ $("#CommercialFlow").on "click", ->
     else
         ascending = false
         $(this).text "Commercial Flow ▼"
-    printRows sortDataByCommercial data, ascending
+    printRows sortDataByCommercial selectedData, ascending
     console.log "Commercial Flow!"
 
 $("#TravellersFlow").on "click", ->
@@ -121,7 +125,7 @@ $("#TravellersFlow").on "click", ->
     else
         ascending = false
         $(this).text "Travellers Flow ▼"
-    printRows sortDataByTravellers data, ascending
+    printRows sortDataByTravellers selectedData, ascending
     console.log "Travellers Flow!"
 
 #startup code to set intial state
