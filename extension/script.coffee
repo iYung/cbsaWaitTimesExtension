@@ -1,5 +1,6 @@
 data = new Array()
 
+#Functions that get/manipulate/print data
 getRowData = (element, record) -> 
     if element.contents().length > 0
         do element
@@ -66,10 +67,27 @@ sortDataByCommercial = (data, ascending) ->
         do data.reverse
     return data
     
+printRows = (rows) ->
+    do $("tbody tr").empty
+    rows.forEach (row) ->
+        $ "tbody"
+            .prepend "<tr><th><b>" + row[0] + "</b><br>" + row[1] + "<br></th><td>" + row[2] + "</td><td>" + row[3] + "</td><td>" + row[4] + "</td></tr>"
+
+#Startup code, makes headers clickable, adds search bar, and runs data grabbing function          
 $ "thead > tr > th"
     .each ->
         $(this).attr "id", $(this).text().replace " ", ''
-    
+
+$ "tbody > tr" 
+    .each -> 
+        record = new Array()
+        getRowData $(this), record
+        data.push record
+
+$ "#bwttaf caption"
+    .append "<br><input placeholder='Search offices'></input>"
+
+#Header functions        
 $("#CBSAOffice").on "click", ->
     ascending = true
     $("#CommercialFlow").text "Commercial Flow"
@@ -105,22 +123,8 @@ $("#TravellersFlow").on "click", ->
         $(this).text "Travellers Flow ▼"
     printRows sortDataByTravellers data, ascending
     console.log "Travellers Flow!"
-    
-printRows = (rows) ->
-    do $("tbody tr").empty
-    rows.forEach (row) ->
-        $ "tbody"
-            .prepend "<tr><th><b>" + row[0] + "</b><br>" + row[1] + "<br></th><td>" + row[2] + "</td><td>" + row[3] + "</td><td>" + row[4] + "</td></tr>"
 
-$ "tbody > tr" 
-    .each -> 
-        record = new Array()
-        getRowData $(this), record
-        data.push record
-
-$ "#bwttaf caption"
-    .append "<br><input placeholder='Search offices'></input>"
-
+#startup code to set intial state
 do $("#TravellersFlow").click
     
 console.log data
