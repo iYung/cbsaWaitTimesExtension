@@ -90,7 +90,18 @@ selectedData = data
 
 $ "#bwttaf caption"
     .append "<br><input id='nameSearch' placeholder='Search offices'></input>"
-
+    
+$("#nameSearch").keyup ->
+    searchKey = do $(this).val().toLowerCase
+    if searchKey != ""
+        selectedData = data.filter (row) ->
+            console.log row[0].toLowerCase().search(searchKey)
+            return row[0].toLowerCase().search(searchKey) != -1
+        printRows sortDataByTravellers selectedData, false
+    else
+        selectedData = data
+        printRows sortDataByTravellers selectedData, false
+    
 #Header functions        
 $("#CBSAOffice").on "click", ->
     ascending = true
