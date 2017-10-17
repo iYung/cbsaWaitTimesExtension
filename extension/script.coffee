@@ -2,6 +2,9 @@ data = new Array()
 
 selectedData = new Array()
 
+ascending = false
+sortType = 2
+
 #Functions that get/manipulate/print data
 getRowData = (element, record) -> 
     if element.contents().length > 0
@@ -97,14 +100,19 @@ $("#nameSearch").keyup ->
         selectedData = data.filter (row) ->
             console.log row[0].toLowerCase().search(searchKey)
             return row[0].toLowerCase().search(searchKey) != -1
-        printRows sortDataByTravellers selectedData, false
     else
         selectedData = data
-        printRows sortDataByTravellers selectedData, false
+    if sortType == 0
+        printRows sortDataByName selectedData, ascending
+    else if sortType == 1
+        printRows sortDataByCommercial selectedData, ascending
+    else
+        printRows sortDataByTravellers selectedData, ascending
     
 #Header functions        
 $("#CBSAOffice").on "click", ->
     ascending = true
+    sortType = 0
     $("#CommercialFlow").text "Commercial Flow"
     $("#TravellersFlow").text "Travellers Flow"
     if do $(this).text == "CBSA Office ▼"
@@ -117,6 +125,7 @@ $("#CBSAOffice").on "click", ->
 
 $("#CommercialFlow").on "click", ->
     ascending = true
+    sortType = 1
     $("#CBSAOffice").text "CBSA Office"
     $("#TravellersFlow").text "Travellers Flow"
     if do $(this).text == "Commercial Flow ▼"
@@ -129,6 +138,7 @@ $("#CommercialFlow").on "click", ->
 
 $("#TravellersFlow").on "click", ->
     ascending = true
+    sortType = 2
     $("#CBSAOffice").text "CBSA Office"
     $("#CommercialFlow").text "Commercial Flow"
     if do $(this).text == "Travellers Flow ▼"
