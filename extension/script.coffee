@@ -23,7 +23,7 @@ sortDataByName = (data, ascending) ->
     
 sortDataByTravellers = (data, ascending) ->
     data.sort (a, b) ->
-        bValue = aValue = 0 
+        bValue = aValue = -1 
         if a[3].indexOf(" minutes") >= 0
             aValue = parseInt a[3].replace " minutes", ""
         else if a[3].indexOf(" minute") >= 0
@@ -89,7 +89,7 @@ $ "tbody > tr"
 selectedData = data
 
 $ "#bwttaf caption"
-    .append "<br><input placeholder='Search offices'></input>"
+    .append "<br><input id='nameSearch' placeholder='Search offices'></input>"
 
 #Header functions        
 $("#CBSAOffice").on "click", ->
