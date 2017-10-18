@@ -92,7 +92,7 @@ $ "tbody > tr"
 selectedData = data
 
 $ "#bwttaf caption"
-    .append "<br><input id='nameSearch' placeholder='Search offices'></input>"
+    .append "<br><input id='nameSearch' style='padding: 2px 3px 2px 3px;' placeholder='Search offices'></input>"
     
 $("#nameSearch").keyup ->
     searchKey = do $(this).val().toLowerCase
